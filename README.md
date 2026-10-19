@@ -1,5 +1,7 @@
 # GitHub Project Publisher
 
+![GitHub 项目发布助手：从本地代码到清晰、可安装的 GitHub 项目，涵盖 README 设计、隐私检查与发布验证。](docs/assets/hero-cover.png)
+
 **让 Codex 把一个本地项目，整理成别人看得懂、装得上、能验证的 GitHub 仓库。**
 
 一个面向项目作者的 Codex Skill：从发布前检查、README 设计、真实素材整理，到仓库发布与远端核对。也可以只改已有项目的介绍页，保留有用内容和原有工作。
