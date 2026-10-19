@@ -1,0 +1,4 @@
+interface:
+  display_name: "成熟 GitHub 项目发布"
+  short_description: "安全发布项目，完善 README 与 GitHub 仓库元数据"
+  default_prompt: "Use $publish-github-project to audit, design a polished evidence-based README, set and verify the approved GitHub repository metadata, and safely publish this project."
