@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="116" height="26" viewBox="0 0 116 26" role="img" aria-labelledby="title desc">
+<title id="title">Python: 3.10+</title>
+<desc id="desc">Project information: Python 3.10+.</desc>
+<rect width="116" height="26" rx="5" fill="#eaf0e9"/>
+<path d="M5 0h56v26H5a5 5 0 0 1-5-5V5a5 5 0 0 1 5-5Z" fill="#234e40"/>
+<g font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="12" text-anchor="middle">
+<text x="30.5" y="17.5" fill="#ffffff">Python</text>
+<text x="88.5" y="17.5" font-weight="600" fill="#234e40">3.10+</text>
+</g></svg>
