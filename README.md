@@ -1,10 +1,10 @@
+<div align="center">
+
 # GitHub Project Publisher
 
 ![GitHub 项目发布助手：从本地代码到清晰、可安装的 GitHub 项目，涵盖 README 设计、隐私检查与发布验证。](docs/assets/hero-cover.png)
 
 **让 Codex 把一个本地项目，整理成别人看得懂、装得上、能验证的 GitHub 仓库。**
-
-一个面向项目作者的 Codex Skill：从发布前检查、README 设计、真实素材整理，到仓库发布与远端核对。也可以只改已有项目的介绍页，保留有用内容和原有工作。
 
 [快速开始](#快速开始) · [工作流程](#工作流程) · [检查脚本](docs/checks.md) · [安全边界](SECURITY.md)
 
@@ -13,15 +13,19 @@
 ![Runtime standard library](https://img.shields.io/badge/运行依赖-Python_标准库-176B50?style=flat-square)
 [![License: MIT](https://img.shields.io/badge/License-MIT-176B50?style=flat-square)](LICENSE)
 
+</div>
+
+> [!NOTE]
+> 这是给 Codex 使用的工作流程与辅助脚本。发布需要你自己的 GitHub 授权；脚本可以独立运行，但不会自动替你发布。
+
+一个面向项目作者的 Codex Skill：从发布前检查、README 设计、真实素材整理，到仓库发布与远端核对。也可以只改已有项目的介绍页，保留有用内容和原有工作。
+
 在 Codex 中这样使用：
 
 ```text
 使用 $publish-github-project 整理当前项目并发布到我的 GitHub。
 保留“解决什么问题”和核心工作流；先检查隐私，再完善 README 和仓库简介。
 ```
-
-> [!NOTE]
-> 这是给 Codex 使用的工作流程与辅助脚本。发布需要你自己的 GitHub 授权；脚本可以独立运行，但不会自动替你发布。
 
 当前技能包版本：**0.2.0**。本次新增项目结构选择、内容保留与素材版本检查，并同步首屏规范。[查看更新记录](CHANGELOG.md)
 

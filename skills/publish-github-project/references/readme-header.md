@@ -20,6 +20,7 @@ Do not move the badges above the Hero, combine navigation with badges, place a l
 
 - **Compact:** for libraries and CLIs, keep the same centered H1 → value → navigation → badges order; an optional compact logo/visual may appear after the title. Put the real usage snippet and install command in the left-aligned body. A cinematic Hero is unnecessary.
 - **Preserve:** for an explicit user layout, evidence report, or a narrow update to an accepted layout, retain that layout. Supply a concrete `--header-note` with `--header-style preserve`. This skips the default arrangement checks, not link, asset, SVG, privacy, or truthfulness checks. Do not select this mode just to suppress an unexplained failure.
+- Approval of a cover, diagram, or wording does not by itself establish approval of the surrounding header alignment. When applying or demonstrating the new README design standard, preserve those assets/content and apply the default arrangement unless the user has actually chosen a different layout.
 - Header-only or badge-only work should preserve the chosen arrangement unless the user asks to change it. Do not redesign other published repositories merely because this default has changed.
 
 ## Badge selection is an evidence decision
