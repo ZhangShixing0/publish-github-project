@@ -11,6 +11,9 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
+from readme_header import is_badge, opening_issues, semantic_h1_count
+from readme_content import has_content, sections, without_fenced_code
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
     sys.stderr.reconfigure(encoding="utf-8")
@@ -24,10 +27,6 @@ RISKY_ASSET_PARTS = {
     ".tmp", "tmp", "temp", "cache", "caches", "_screenshots", "playwright-report",
     "test-results", "preview-output", "visual-regression", "screenshots-cache",
 }
-BADGE_MARKERS = (
-    "img.shields.io", "/actions/workflows/", "badge.svg", "badgen.net",
-    "codecov.io", "coveralls.io",
-)
 
 
 @dataclass(frozen=True)
@@ -69,22 +68,6 @@ def is_remote(target: str) -> bool:
     return target.startswith(("http://", "https://", "mailto:", "data:"))
 
 
-def without_fenced_code(markdown: str) -> str:
-    lines = []
-    fence = None
-    for line in markdown.splitlines(keepends=True):
-        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line.rstrip("\r\n"))
-        if fence is None and marker:
-            fence = marker.group(1)
-            lines.append("\n" if line.endswith("\n") else "")
-        elif fence is not None:
-            if marker and marker.group(1)[0] == fence[0] and len(marker.group(1)) >= len(fence) and not marker.group(2).strip():
-                fence = None
-            lines.append("\n" if line.endswith("\n") else "")
-        else:
-            lines.append(line)
-    return "".join(lines)
-
 
 def markdown_links(markdown: str) -> list[str]:
     markdown = without_fenced_code(markdown)
@@ -124,11 +107,6 @@ def resolve_local(root: Path, readme: Path, target: str) -> Path:
     if target.startswith("/"):
         return (root / target.lstrip("/")).resolve()
     return (readme.parent / target).resolve()
-
-
-def is_badge(source: str) -> bool:
-    lowered = source.lower()
-    return any(marker in lowered for marker in BADGE_MARKERS)
 
 
 def local_name(tag_or_attr: str) -> str:
@@ -177,13 +155,31 @@ def main() -> int:
     parser.add_argument("repository", nargs="?", default=".")
     parser.add_argument("--strict", action="store_true", help="Treat structural warnings as errors.")
     parser.add_argument("--visual", action="store_true", help="Require and validate a deliberate first-screen visual treatment.")
+    parser.add_argument("--header-style", choices=("showcase", "compact", "preserve"), help="Opening layout; --visual defaults to showcase. Routine checks otherwise leave header layout unchanged.")
+    parser.add_argument("--header-note", help="Concrete reason for preserving an explicit/accepted nondefault layout.")
+    parser.add_argument("--plan", type=Path, help="Check a local publication plan, baseline preservation and versioned media.")
+    parser.add_argument("--readme", type=Path, help="Check a specific repository-relative README, including a translated edition.")
     args = parser.parse_args()
+    if args.header_style == "preserve" and not (args.header_note or "").strip():
+        parser.error("--header-style preserve requires --header-note with the actual layout/scope reason")
+    header_style = args.header_style or ("showcase" if args.visual else None)
+    if args.plan and args.readme:
+        parser.error("--plan checks the default README baseline; run --readme separately for translations")
 
     try:
         root = repository_root(Path(args.repository).resolve())
-        readme = next((root / name for name in ("README.md", "README.MD", "readme.md") if (root / name).is_file()), None)
-        if not readme:
-            print("ERROR README: missing README.md")
+        if args.readme:
+            if args.readme.is_absolute():
+                parser.error("--readme must be repository-relative")
+            readme = (root / args.readme).resolve()
+            try:
+                readme.relative_to(root)
+            except ValueError:
+                parser.error("--readme must stay inside the repository")
+        else:
+            readme = next((root / name for name in ("README.md", "README.MD", "readme.md") if (root / name).is_file()), None)
+        if not readme or not readme.is_file():
+            print("ERROR README: selected README file is missing")
             return 1
 
         text = readme.read_text(encoding="utf-8-sig")
@@ -192,8 +188,12 @@ def main() -> int:
 
         if re.search(r"\{\{[A-Z0-9_ -]+\}\}|\[TODO(?::[^\]]*)?\]", text, re.I):
             errors.append("README contains template placeholders or TODO markers")
-        if not re.search(r"(?im)^#\s+\S", text):
+        visible_text = without_fenced_code(text)
+        title_count = semantic_h1_count(visible_text)
+        if title_count == 0:
             errors.append("README has no semantic H1 project title")
+        elif title_count > 1:
+            errors.append(f"README must have one semantic H1 project title; found {title_count}")
 
         section_rules = {
             "problem/value": r"项目解决什么问题|解决.*问题|why|problem|overview",
@@ -201,9 +201,14 @@ def main() -> int:
             "verification": r"验证|测试|verify|tests?",
             "security": r"安全|隐私|security|privacy",
         }
+        content_sections = sections(text)
         for label, pattern in section_rules.items():
-            if not re.search(pattern, text, re.I):
+            if not any(re.search(pattern, section["title"], re.I) and has_content(section["body"])
+                       for section in content_sections if section["level"] >= 2):
                 warnings.append(f"README does not clearly expose a {label} section")
+        if args.plan:
+            from publication_plan import verify_plan
+            errors.extend(verify_plan(root, args.plan))
 
         checked_targets: set[str] = set()
         for target in markdown_links(text):
@@ -220,9 +225,13 @@ def main() -> int:
                 errors.append(f"README local link is broken: {target}")
 
         images = image_references(text)
+        if header_style:
+            warnings.extend(opening_issues(visible_text, images, root, readme, header_style))
+        if header_style == "preserve":
+            print(f"Header arrangement preserved: {args.header_note}")
         local_images: list[tuple[ImageRef, Path]] = []
         for image in images:
-            if args.visual and image.requires_alt and not image.alt and not is_badge(image.source):
+            if args.visual and image.requires_alt and not image.alt:
                 warnings.append(f"README image has no descriptive alt text at line {image.line}: {image.source}")
             if args.visual and is_remote(image.source) and not is_badge(image.source):
                 warnings.append(f"README visual depends on a remote image; prefer a repository asset: {image.source}")
@@ -256,7 +265,7 @@ def main() -> int:
         if args.visual:
             first_screen = "\n".join(text.splitlines()[:80])
             first_screen_images = [ref for ref in image_references(first_screen) if not is_badge(ref.source)]
-            if not first_screen_images:
+            if not first_screen_images and header_style != "compact":
                 warnings.append("visual mode found no non-badge image in the first 80 README lines")
             tags = git_tags(root)
             if tags and not re.search(r"(?i)(/releases|/tags|CHANGELOG|版本中心|release|tag)", first_screen):
@@ -279,8 +288,8 @@ def main() -> int:
             f"{len(warnings)} warning(s), {len(local_images)} local image(s)."
         )
         return 1 if errors or (args.strict and warnings) else 0
-    except (OSError, RuntimeError, UnicodeError) as exc:
-        print(f"Verification failed: {exc}", file=sys.stderr)
+    except (OSError, RuntimeError, UnicodeError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        print(f"Verification could not complete ({type(exc).__name__}); check repository and plan inputs.", file=sys.stderr)
         return 2
 
 

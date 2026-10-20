@@ -1,30 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="250" viewBox="0 0 1120 250" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="268" viewBox="0 0 1120 268" role="img" aria-labelledby="title desc">
 <title id="title">从项目到 GitHub 的四步流程</title>
-<desc id="desc">检查范围、文件与隐私；整理 README 和真实素材；运行测试并审核提交内容；发布后核对文件、元数据与页面。</desc>
-<rect x="1" y="1" width="1118" height="248" rx="18" fill="#f6f8fa" stroke="#d0d7de"/>
+<desc id="desc">理解项目与范围，组织 README 和真实素材，验证内容，按授权发布并核对文件和页面。</desc>
+<rect x="1" y="1" width="1118" height="266" rx="18" fill="#f7f7f0" stroke="#dce3d9"/>
 <g font-family="'Segoe UI','Microsoft YaHei',sans-serif">
-<rect x="22" y="24" width="248" height="202" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<text x="42" y="56" font-size="16" font-weight="700" fill="#176b50">01</text>
-<text x="42" y="93" font-size="27" font-weight="700" fill="#172b3a">检查</text>
-<text x="42" y="126" font-size="19" fill="#33475b">范围 · 文件 · 隐私</text>
-<text x="42" y="188" font-size="17" fill="#576576">明确发布内容</text>
-<path d="M277 125h14m-5-5 5 5-5 5" fill="none" stroke="#176b50" stroke-width="2"/>
-<rect x="298" y="24" width="248" height="202" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<text x="318" y="56" font-size="16" font-weight="700" fill="#176b50">02</text>
-<text x="318" y="93" font-size="27" font-weight="700" fill="#172b3a">整理</text>
-<text x="318" y="126" font-size="19" fill="#33475b">README · 真实素材</text>
-<text x="318" y="188" font-size="17" fill="#576576">解释问题与流程</text>
-<path d="M553 125h14m-5-5 5 5-5 5" fill="none" stroke="#176b50" stroke-width="2"/>
-<rect x="574" y="24" width="248" height="202" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<text x="594" y="56" font-size="16" font-weight="700" fill="#176b50">03</text>
-<text x="594" y="93" font-size="27" font-weight="700" fill="#172b3a">验证</text>
-<text x="594" y="126" font-size="19" fill="#33475b">测试 · 链接 · 暂存区</text>
-<text x="594" y="188" font-size="17" fill="#576576">核对准备提交的内容</text>
-<path d="M829 125h14m-5-5 5 5-5 5" fill="none" stroke="#176b50" stroke-width="2"/>
-<rect x="850" y="24" width="248" height="202" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<text x="870" y="56" font-size="16" font-weight="700" fill="#176b50">04</text>
-<text x="870" y="93" font-size="27" font-weight="700" fill="#172b3a">发布</text>
-<text x="870" y="126" font-size="19" fill="#33475b">上传 · 元数据 · 页面</text>
-<text x="870" y="188" font-size="17" fill="#576576">核对实际发布结果</text>
-</g>
-</svg>
+<rect x="22" y="24" width="248" height="220" rx="12" fill="#ffffff" stroke="#dce3d9"/>
+<text x="42" y="58" font-size="16" font-weight="700" fill="#53685d">01</text>
+<text x="42" y="105" font-size="28" font-weight="700" fill="#16352a">理解项目</text>
+<text x="42" y="141" font-size="20" fill="#16352a">看清用途与发布范围</text>
+<path d="M42 172h208" stroke="#dce3d9"/>
+<text x="42" y="207" font-size="17" fill="#53685d">代码 · 文档 · 现有素材</text>
+<path d="M277 134h14m-5-5 5 5-5 5" fill="none" stroke="#638c73" stroke-width="2"/>
+<rect x="298" y="24" width="248" height="220" rx="12" fill="#ffffff" stroke="#dce3d9"/>
+<text x="318" y="58" font-size="16" font-weight="700" fill="#53685d">02</text>
+<text x="318" y="105" font-size="28" font-weight="700" fill="#16352a">组织展示</text>
+<text x="318" y="141" font-size="20" fill="#16352a">讲清价值与上手路径</text>
+<path d="M318 172h208" stroke="#dce3d9"/>
+<text x="318" y="207" font-size="17" fill="#53685d">README · 图表 · 截图</text>
+<path d="M553 134h14m-5-5 5 5-5 5" fill="none" stroke="#638c73" stroke-width="2"/>
+<rect x="574" y="24" width="248" height="220" rx="12" fill="#ffffff" stroke="#dce3d9"/>
+<text x="594" y="58" font-size="16" font-weight="700" fill="#53685d">03</text>
+<text x="594" y="105" font-size="28" font-weight="700" fill="#16352a">验证内容</text>
+<text x="594" y="141" font-size="20" fill="#16352a">核对文件与发布素材</text>
+<path d="M594 172h208" stroke="#dce3d9"/>
+<text x="594" y="207" font-size="17" fill="#53685d">测试 · 链接 · 隐私复核</text>
+<path d="M829 134h14m-5-5 5 5-5 5" fill="none" stroke="#638c73" stroke-width="2"/>
+<rect x="850" y="24" width="248" height="220" rx="12" fill="#234e40" stroke="#234e40"/>
+<text x="870" y="58" font-size="16" font-weight="700" fill="#d7e7db">04</text>
+<text x="870" y="105" font-size="28" font-weight="700" fill="#ffffff">发布验收</text>
+<text x="870" y="141" font-size="20" fill="#ffffff">按授权发布并核对</text>
+<path d="M870 172h208" stroke="#527764"/>
+<text x="870" y="207" font-size="17" fill="#d7e7db">仓库 / PR · 验收结果</text>
+</g></svg>

@@ -34,6 +34,8 @@ When video production is requested, infer the goal and available material from c
 
 Use the supplied video and verified product facts. Preserve the user's edit and narration unless they request changes.
 
+For replacement, first record the newly supplied source hash, intended original/preview outputs, transformations, and retired files/links using `publication-plan.md`. Resolve the latest request against this source version. Previous redaction/cropping decisions apply only to their recorded scope; they do not silently carry over to a new source. Inspect the new source for material findings and use existing authorization where applicable.
+
 ### Prepare
 
 - Inspect duration, file size, video/audio codecs, dimensions, and pixel format with an available media probe. Sample the beginning, product views, sensitive interfaces, and ending; inspect any frames that may contain personal or customer data.

@@ -8,6 +8,7 @@ Use for adding media, improving a README, or updating repository metadata withou
 - Preserve accepted brand assets and information unless the requested improvement benefits from changing them. A new video does not require a new Hero, release, license, or deployment.
 - Keep a precise changed-file allowlist. Record the base SHA and approved operation; existing authorization for that same operation persists during the task. Approval for an earlier, different PR does not authorize a new merge.
 - Prepare a concrete preview before any approval that is still required. Default to a branch and draft PR for an established repository.
+- For substantive README redesigns and media replacements, use the local baseline/decision record in `publication-plan.md`. Preserve ordinary small-update efficiency; do not create a full redesign plan for a typo or metadata-only task.
 
 ## Preserve meaning when restyling a README
 
@@ -17,6 +18,7 @@ Use for adding media, improving a README, or updating repository metadata withou
 - Keep useful tables and diagrams, or replace them with an equally informative treatment. For example, a role table and a workflow diagram can answer different questions; a bare arrow sequence may omit the table's input/output mapping or the diagram's handoff conditions. Do not require every project to use either format.
 - Remove inaccurate, obsolete, duplicated, or explicitly unwanted material with a concrete reason. A request to make the page more attractive is not by itself a reason to drop meaningful content.
 - Before publishing, compare the candidate with the baseline using the mapping and diff. Restore unexplained losses or resolve a material scope ambiguity with the user. `verify_project.py` checks structure and assets; passing keyword/heading checks does not establish semantic completeness.
+- `verify_project.py --plan` checks the recorded section mapping and detects unreviewed body changes. It still cannot determine whether an approved rewrite preserved the meaning; perform that comparison before writing its review note.
 
 ## Proportionate verification
 

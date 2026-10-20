@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="268" viewBox="0 0 1120 268" role="img" aria-labelledby="title desc">
+<title id="title">Four steps from a local project to GitHub</title>
+<desc id="desc">Understand the scope, organize the README and real media, verify content, then publish as authorized and check the result.</desc>
+<rect x="1" y="1" width="1118" height="266" rx="18" fill="#f7f7f0" stroke="#dce3d9"/>
+<g font-family="'Segoe UI','Microsoft YaHei',sans-serif">
+<rect x="22" y="24" width="248" height="220" rx="12" fill="#ffffff" stroke="#dce3d9"/>
+<text x="42" y="58" font-size="16" font-weight="700" fill="#53685d">01</text>
+<text x="42" y="105" font-size="26" font-weight="700" fill="#16352a">Understand</text>
+<text x="42" y="141" font-size="18" fill="#16352a">Define project &amp; scope</text>
+<path d="M42 172h208" stroke="#dce3d9"/>
+<text x="42" y="207" font-size="15" fill="#53685d">Code · Docs · Media</text>
+<path d="M277 134h14m-5-5 5 5-5 5" fill="none" stroke="#638c73" stroke-width="2"/>
+<rect x="298" y="24" width="248" height="220" rx="12" fill="#ffffff" stroke="#dce3d9"/>
+<text x="318" y="58" font-size="16" font-weight="700" fill="#53685d">02</text>
+<text x="318" y="105" font-size="26" font-weight="700" fill="#16352a">Organize</text>
+<text x="318" y="141" font-size="18" fill="#16352a">Explain value &amp; first use</text>
+<path d="M318 172h208" stroke="#dce3d9"/>
+<text x="318" y="207" font-size="15" fill="#53685d">README · Diagrams · Images</text>
+<path d="M553 134h14m-5-5 5 5-5 5" fill="none" stroke="#638c73" stroke-width="2"/>
+<rect x="574" y="24" width="248" height="220" rx="12" fill="#ffffff" stroke="#dce3d9"/>
+<text x="594" y="58" font-size="16" font-weight="700" fill="#53685d">03</text>
+<text x="594" y="105" font-size="26" font-weight="700" fill="#16352a">Verify</text>
+<text x="594" y="141" font-size="18" fill="#16352a">Check files &amp; media</text>
+<path d="M594 172h208" stroke="#dce3d9"/>
+<text x="594" y="207" font-size="15" fill="#53685d">Tests · Links · Privacy</text>
+<path d="M829 134h14m-5-5 5 5-5 5" fill="none" stroke="#638c73" stroke-width="2"/>
+<rect x="850" y="24" width="248" height="220" rx="12" fill="#234e40" stroke="#234e40"/>
+<text x="870" y="58" font-size="16" font-weight="700" fill="#d7e7db">04</text>
+<text x="870" y="105" font-size="26" font-weight="700" fill="#ffffff">Publish</text>
+<text x="870" y="141" font-size="18" fill="#ffffff">Publish &amp; check results</text>
+<path d="M870 172h208" stroke="#527764"/>
+<text x="870" y="207" font-size="15" fill="#d7e7db">Repository / PR · Review</text>
+</g></svg>

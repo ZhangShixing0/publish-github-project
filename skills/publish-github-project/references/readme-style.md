@@ -8,14 +8,12 @@ For visual redesigns, read `readme-visual-design.md` after this file.
 
 ## Information order
 
-1. Semantic H1, one-sentence value proposition, and optional Hero that communicates the product rather than adding decoration.
-2. Short quick-navigation row and two to five verified badges. Separate navigation from status badges.
-3. One GitHub callout for the most important maturity, safety, or scope limitation.
-4. Version center near the top when the repository has Releases, Tags, multiple retained versions, or frequent confusion about the current version.
-5. Problem and workflow, expressed with a narrow table and/or small Mermaid diagram when each clarifies distinct relationships.
-6. Implemented capabilities and system components.
-7. Tested quick start, verification command, and one synthetic example.
-8. Deeper architecture, directory tree, security boundary, limitations, roadmap, contribution, and license. Collapse secondary detail when useful.
+1. Compose the opening using `readme-header.md`, the sole specification for order, alignment, and mode exceptions.
+2. Select useful badges from project evidence using that specification; do not pad the count or infer missing versions/licenses.
+3. Use `publication-plan.md` to choose the body reading path for apps, tools or skills. Preserve user-selected layouts and focused-update scope; record justified deviations rather than imposing one sequence on every project.
+4. Keep the concrete problem early. Include a left-aligned maturity/scope callout or version entry near the top only when readers need it.
+5. Select real demonstration evidence and a workflow/architecture diagram or input/output example according to that profile. SVG and Mermaid are both valid diagram formats.
+6. Provide a tested shortest-path quick start and verification, then link deeper capabilities, architecture, security, limitations, contribution and license information where useful.
 
 ## Writing rules
 
@@ -39,7 +37,7 @@ For visual redesigns, read `readme-visual-design.md` after this file.
 
 ## Visual restraint
 
-- Center the identity block, not the entire document.
+- Apply the opening alignment in `readme-header.md`; keep body reading comfortable and left aligned.
 - Keep one dominant Hero and one compact relationship visual at most.
 - Prefer a current, purposeful image over a gallery of stale screenshots.
 - Avoid emoji decoration unless the project already uses that voice.

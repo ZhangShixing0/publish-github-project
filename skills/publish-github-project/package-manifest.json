@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "version": "0.2.2",
+  "files": {
+    "agents/openai.yaml": "1bd90e167175b3924f4f32fff4f1c2c2cabf4ddc79ab388182541a67103013e6",
+    "assets/readme-template.md": "710de2b905523814ff6081d8e645ab177814bcd5e33c2de33a65aa8efd3899fb",
+    "LICENSE": "00f0d741233687d4a34a973fd642155335a965efede5c461e687410d7ac099d8",
+    "references/focused-updates.md": "3ee2bbc0d7950093d409964994d29cc937cea2b5b5e66aa8109d375a81e2b1ea",
+    "references/project-media.md": "0b9c805895811a9419edc56483ccbdc98294c97ca1a3fbe12941ff4cea83e662",
+    "references/publication-plan.md": "549d1163b98b361829599f696f8f6cfa353359bcb305317077425347c855926a",
+    "references/publishing-policy.md": "99f3f8fe8998c852d7a4895fb216eaee61317c7c90b2c9b9676f3a51ac519c75",
+    "references/readme-header.md": "0db2c30ed7a1437c47b75d84f6b57f6cdbe772ee9c30ab0e906053ea2bb65fe1",
+    "references/readme-languages.md": "d9118e0d12678a08799316b47a48011bb0ca17bceb3673d2a83c8f7f67b9a9bf",
+    "references/readme-style.md": "8a683b979423577fab763fa1802bc9f344d066d6b5b058bc7b8072d98e3eeda0",
+    "references/readme-visual-design.md": "bf1464d1bfde13dccca92f3540c1fdda822e579816ca72dcf45e07490bc7d12b",
+    "references/repository-metadata.md": "cb0d26dd67ee8083415818fd5db8beea26b830ded5c5dc3fe3446c59077d33c0",
+    "scripts/audit_repository.py": "866b1485d3a50da8e7926744f9bc2db6883cf73cdef65d05bb0185e36ace3186",
+    "scripts/publication_plan.py": "b09d07b629bc311928eaa0ccefeb1a97eef5143c575644251bdbc3e53d597f91",
+    "scripts/readme_content.py": "885aac02661eaa63aba02f5848cf619acf3fd83bcdd32897b13f24e8e16d2e16",
+    "scripts/readme_header.py": "d798391333629deb7e89e83e93e1f7408b48f8c3b94b4225ff05cd31d4c7372d",
+    "scripts/render_badges.py": "b755d79405ba998c31e5fa5337cdb8247e3e2d0ef10cb01cb9889e36483d82b1",
+    "scripts/skill_package.py": "e440fca835195cf67db6577166419632867b558730de7d55f369070407f490db",
+    "scripts/test_audit_repository.py": "9ca1adc42ca28a4a38f6ae18fbc4658c4ae5c6fd79033321851cf44ddedc1076",
+    "scripts/test_publication_plan.py": "54e35a1dfc43de90a36272c4d737f1b63d24e3a242df47ad3e952e0b84ab12ca",
+    "scripts/test_render_badges.py": "5f1558c828e4d506a84129230a99f6cc20bafb15376fd53d25d29951652c3a2b",
+    "scripts/test_verify_project.py": "e318d55f4aeecf51509429e396c36ffbb40c6512f2b201f436ea440406fa384b",
+    "scripts/test_verify_remote.py": "8f8bd3a868b35ad13289ae3f1ea65430b3a077e6814b5045bb23bbc0a9d49096",
+    "scripts/verify_project.py": "45bd7c31f290eeb7e053a98709497283a8bddccb7bb32ad02b3e95c53f31bc47",
+    "scripts/verify_remote.py": "2a5e8a78b7c2d0673908591904ac7602ef55dd2700f4d339373b2f8c42ed93dd",
+    "SKILL.md": "84023c57dda64f469028b820e86f1ea6973391141eafadac2ffd13aae48fc925",
+    "VERSION": "998f6b887ed7a6ef44e84210d0237b715bed42ea7254f48dc418afec0a484103"
+  }
+}

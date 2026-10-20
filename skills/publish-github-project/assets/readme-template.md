@@ -1,8 +1,15 @@
+<!-- Opening specification: references/readme-header.md in the publishing skill.
+     Keep the following five blocks in order; close centering before the body.
+     For requested language editions, insert a relative language-switch row
+     immediately after the single H1; see references/readme-languages.md.
+     Use one title in this edition's language; do not add a second-line translation.
+     Render flat-square-v1 badges with scripts/render_badges.py; retain the
+     repository's badge manifest and accepted style during later updates. -->
 <div align="center">
 
 # {{PROJECT_NAME}}
 
-{{OPTIONAL_HERO_WITH_DESCRIPTIVE_ALT}}
+{{HERO_WITH_DESCRIPTIVE_ALT}}
 
 **{{ONE_SENTENCE_VALUE}}**
 
