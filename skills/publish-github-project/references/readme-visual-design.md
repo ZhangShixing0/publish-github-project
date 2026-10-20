@@ -6,22 +6,15 @@ Use this guide for requests such as “README 太 low”, “做得更好看”,
 
 | Mode | Best for | First-screen treatment |
 | --- | --- | --- |
-| Product showcase | User-facing apps, SaaS, dashboards, multi-role systems | H1, product Hero, value sentence, nav, status badges, maturity callout |
-| Developer tool | Libraries, CLIs, SDKs, APIs | Compact identity, real usage snippet, install command, compatibility badges |
-| Evidence report | Research, datasets, benchmarks, internal methods | Clear title, provenance/status card, findings or schema visual, citation path |
+| Product showcase | User-facing apps, SaaS, dashboards, multi-role systems | Showcase opening from `readme-header.md` |
+| Developer tool | Libraries, CLIs, SDKs, APIs | Compact opening from `readme-header.md`, then real usage/install commands |
+| Evidence report | Research, datasets, benchmarks, internal methods | Preserve a purposeful report layout with a documented header exception |
 
 Do not force a large Hero onto a small library. Do not reduce a visual product to a badge wall and directory listing.
 
 ## 2. Compose the first screen
 
-For product showcase mode, use this sequence:
-
-1. One semantic H1.
-2. One Hero with a descriptive alt attribute.
-3. One concrete value sentence.
-4. Three to five quick links such as version, workflow, quick start, architecture, and security.
-5. Two to five verified badges in one row.
-6. One maturity or safety callout.
+Read `readme-header.md` for the canonical sequence, centered identity boundary, badge evidence, and mode exceptions. Use `assets/readme-template.md` as its implementation; do not maintain an alternative sequence here.
 
 Keep Release and Tags discoverable without requiring readers to understand GitHub navigation.
 
@@ -80,7 +73,7 @@ Use user-facing aliases such as “v721” alongside canonical tags when both ex
 
 ## 7. Sign off visual work
 
-1. Run `scripts/verify_project.py --strict --visual <repo>`.
+1. Run `scripts/verify_project.py --strict --visual <repo>`; choose a documented `--header-style` from `readme-header.md` when the showcase default does not fit.
 2. Render and inspect every new Hero or SVG.
 3. Check local links, image alt text, Release/Tag links, badge targets, and mobile-width tables.
 4. Review `git diff --check`, staged file sizes, and the exact staged paths.

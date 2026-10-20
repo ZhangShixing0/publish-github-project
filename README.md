@@ -23,6 +23,8 @@
 > [!NOTE]
 > 这是给 Codex 使用的工作流程与辅助脚本。发布需要你自己的 GitHub 授权；脚本可以独立运行，但不会自动替你发布。
 
+当前技能包版本：**0.2.0**。本次新增项目结构选择、内容保留与素材版本检查，并同步首屏规范。[查看更新记录](CHANGELOG.md)
+
 ## 项目解决什么问题
 
 代码能运行以后，发布仍有许多细节：怎样说明产品价值、哪些文件可以公开、没有截图怎么展示，以及上传后的内容是否与本地一致。
@@ -34,6 +36,9 @@
 | 没有截图或视频 | 条件允许时运行真实产品并用测试数据截图；没有视频就省略视频模块 |
 | 有视频，但包含个人信息 | 检查画面、文件名、字幕与口播，完成必要处理后再展示 |
 | 上传成功，却不知道页面是否可用 | 分别核对提交与文件、仓库元数据、CI 和实际页面显示 |
+| 每个项目顺序不同，不知道是否漏了内容 | 按应用、工具、Skill 选择阅读顺序，记录保留内容和合理例外 |
+| 已有 SVG 流程图却被当作缺图 | 检查实际引用，支持图片与 Mermaid；简单工具可说明理由后省略图表 |
+| 替换视频时混入旧版或旧处理要求 | 按源文件哈希记录版本与处理决定，核对原片字节及旧引用 |
 
 ## 工作流程
 
@@ -45,6 +50,8 @@
 流程图直接使用仓库内的 SVG，文字与连线可编辑，展示不依赖 Mermaid 的交互组件。
 
 **两种使用范围：** 新项目走完整发布流程；已有项目只更新 README、素材或元数据时，采用小范围更新，保留已经确认的内容。公开可见性、许可、合并和 Release 等决定遵循用户授权。
+
+完整发布、较大 README 改版及视频替换会使用一份仓库外的本地发布方案：先记录基线与当前决定，再检查候选结果。普通文字或链接修正保持轻量，不强制重新设计页面。记录由 Codex 维护，无需使用者填写技术表单。
 
 ## 快速开始
 
@@ -58,6 +65,8 @@ https://github.com/ZhangShixing0/publish-github-project/tree/main/skills/publish
 ```
 
 安装后确认技能列表中出现 `publish-github-project`；若未显示，重启 Codex 再检查。已有同名技能时，先对比和备份自己的修改，再更新。
+
+技能目录中的 `VERSION` 标明版本；`package-manifest.json` 记录对应文件哈希。已有用户可按[版本检查与更新说明](docs/checks.md#技能版本与安装副本)检查文件是否完整、安装副本是否存在定制差异。
 
 也可手动把本仓库的 `skills/publish-github-project` 文件夹放到目标项目的 `.agents/skills/` 下。安装整个技能文件夹，保留 `references/`、`scripts/`、`assets/` 与 `agents/`。[Codex 官方技能说明](https://learn.chatgpt.com/docs/build-skills)
 
@@ -87,7 +96,7 @@ https://github.com/ZhangShixing0/publish-github-project/tree/main/skills/publish
 
 ### 3. 单独运行检查脚本
 
-需要 **Python 3.10+ 和 Git**；三个检查脚本只使用 Python 标准库。发布及 GitHub API 核对还需要已经授权的 GitHub 工具；API 核对脚本使用 GitHub CLI `gh`。
+需要 **Python 3.10+ 和 Git**；检查脚本只使用 Python 标准库。发布及 GitHub API 核对还需要已经授权的 GitHub 工具；API 核对脚本使用 GitHub CLI `gh`。
 
 在克隆后的本仓库根目录运行：
 
@@ -107,7 +116,7 @@ python skills/publish-github-project/scripts/verify_remote.py /path/to/your-proj
 python scripts/check.py
 ```
 
-回归测试覆盖暂存区内容与工作区不一致、凭据识别、二进制人工复核、README 本地链接、响应式图片、SVG 安全约束，以及远端提交与文件哈希的核对。测试不需要 GitHub 凭据，也不会创建远端仓库。
+回归测试覆盖暂存区内容与工作区不一致、凭据识别、二进制人工复核、README 本地链接、响应式图片、首屏排列、SVG 安全约束，以及远端提交与文件哈希的核对。新版还覆盖内容保留、图表选择、素材替换和安装副本差异。测试不需要 GitHub 凭据，也不会创建远端仓库。
 
 自动检查通过后，仍需核对功能描述、媒体隐私与实际页面。检查脚本的结果不能替代这些判断。
 
@@ -122,12 +131,14 @@ skills/publish-github-project/
 ├── agents/openai.yaml   Codex 展示信息
 ├── references/          README、素材、发布与元数据指引
 ├── assets/              README 起始模板
-└── scripts/             三个检查脚本及回归测试
+├── scripts/             检查脚本、本地方案工具及回归测试
+├── VERSION              技能包版本
+└── package-manifest.json 对应版本的文件哈希
 docs/                    脚本说明与工作流程图
 scripts/check.py          仓库验证入口
 ```
 
-仓库首页面向使用者；技能目录保存可直接安装的完整内容。模板需要按项目证据改写，不应直接填满所有模块。
+仓库首页面向使用者；`skills/publish-github-project/` 是公开技能包的维护源，安装目录是它的使用副本。维护时先修改仓库、更新版本与清单并验证，再同步安装副本；有本地定制时先比较和保留。模板需要按项目证据改写，不应直接填满所有模块。
 
 </details>
 

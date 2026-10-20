@@ -5,7 +5,7 @@
 1. 说明触发条件、期望结果和实际结果；只使用合成数据。
 2. 在分支中做小范围修改，保留技能的授权边界和已有内容保护规则。
 3. 修改脚本行为时，为可观察的结果补回归测试；普通文案修改无需机械增加测试。
-4. 从仓库根目录运行 `python scripts/check.py`。
+4. 以 `skills/publish-github-project/` 为技能包维护源；修改包内容后更新版本/更新记录，并运行 `python skills/publish-github-project/scripts/skill_package.py build-manifest`。随后从仓库根目录运行 `python scripts/check.py`；不要只修改自己的安装副本而遗漏公开包。
 5. 提交前运行 `git diff --check`，检查文件列表，并运行暂存区审计：
 
 ```bash

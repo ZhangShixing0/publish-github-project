@@ -1,8 +1,10 @@
+<!-- Opening specification: references/readme-header.md in the publishing skill.
+     Keep the following five blocks in order; close centering before the body. -->
 <div align="center">
 
 # {{PROJECT_NAME}}
 
-{{OPTIONAL_HERO_WITH_DESCRIPTIVE_ALT}}
+{{HERO_WITH_DESCRIPTIVE_ALT}}
 
 **{{ONE_SENTENCE_VALUE}}**
 

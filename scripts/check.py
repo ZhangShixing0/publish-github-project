@@ -28,7 +28,8 @@ def main():
     if not result.wasSuccessful():
         return 1
     for name, flags in (
-        ("verify_project.py", ["--strict", "--visual"]),
+        ("verify_project.py", ["--strict", "--visual", "--header-style", "preserve",
+                               "--header-note", "Retain the owner's approved cover and existing README opening"]),
         ("audit_repository.py", []),
     ):
         outcome = subprocess.run(
@@ -38,7 +39,10 @@ def main():
         )
         if outcome.returncode:
             return outcome.returncode
-    return 0
+    return subprocess.run(
+        [sys.executable, "-B", str(SCRIPTS / "skill_package.py"), "verify"],
+        cwd=ROOT, check=False,
+    ).returncode
 
 
 if __name__ == "__main__":
