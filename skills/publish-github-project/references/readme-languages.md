@@ -5,7 +5,7 @@ Apply when the user requests a bilingual title, multiple README editions, or mai
 ## Identity and switching
 
 - For a requested Chinese/English README, use `README.md` as the chosen default and `README.en.md` (or the established locale filename) as the other complete edition.
-- Keep one semantic H1. A Chinese primary identity can use `<h1>中文项目名称<br><sub>English Project Name</sub></h1>`. The English edition may reverse the order. Keep the code/package identifier unchanged.
+- Keep one semantic H1 and one displayed project name per edition by default: `<h1>GitHub 项目发布助手</h1>` in Chinese and `<h1>GitHub Project Publisher</h1>` in English, for example. A name may naturally mix languages. Do not automatically append a translated subtitle or use `<br><sub>` to stack two names just because language switching exists. Retain a bilingual heading only when the user explicitly chooses it. Natural wrapping on a narrow screen is acceptable; keep the code/package identifier unchanged.
 - Put a separate centered switch immediately after the H1, before the Hero. Use relative Markdown links in both files, including the current language; bold the current choice. Do not hardcode `main`, so preview branches and forks continue to work.
 
 ```markdown

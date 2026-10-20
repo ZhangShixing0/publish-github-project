@@ -10,7 +10,16 @@ import re
 import sys
 import unicodedata
 
-STYLE = "forest-v1"
+STYLE = "flat-square-v1"
+STYLES = {STYLE, "forest-v1"}
+COLORS = {
+    "version": "#456a63",
+    "platform": "#a86b3a",
+    "technology": "#456a63",
+    "runtime": "#427d89",
+    "license": "#686d74",
+    "status": "#686d74",
+}
 FONT = "'Segoe UI','Microsoft YaHei',sans-serif"
 
 
@@ -18,7 +27,8 @@ def text_width(text: str) -> int:
     return max(44, 20 + sum(12 if unicodedata.east_asian_width(c) in "WF" else 8 for c in text))
 
 
-def render(label: str, value: str, left: int | None = None, right: int | None = None) -> str:
+def render(label: str, value: str, left: int | None = None, right: int | None = None,
+           *, style: str = STYLE, category: str | None = None) -> str:
     for text in (label, value):
         if not isinstance(text, str) or not text.strip() or len(text) > 40 or any(ord(c) < 32 for c in text):
             raise ValueError("badge label/value must contain 1-40 printable characters")
@@ -26,7 +36,24 @@ def render(label: str, value: str, left: int | None = None, right: int | None = 
     right = text_width(value) if right is None else right
     if any(type(w) is not int or not 24 <= w <= 600 for w in (left, right)):
         raise ValueError("badge widths must be integers between 24 and 600")
+    if style not in STYLES:
+        raise ValueError("unknown badge style")
     width = left + right
+    if style == STYLE:
+        if category not in COLORS:
+            raise ValueError("flat-square badges require a supported category")
+        return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="20" viewBox="0 0 {width} 20" role="img" aria-labelledby="title desc">
+<title id="title">{escape(label)}: {escape(value)}</title>
+<desc id="desc">Project information: {escape(label)} {escape(value)}.</desc>
+<rect width="{left}" height="20" fill="#555555"/>
+<rect x="{left}" width="{right}" height="20" fill="{COLORS[category]}"/>
+<g font-family="Verdana,Arial,'Microsoft YaHei',sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">
+<text x="{left/2}" y="14">{escape(label)}</text>
+<text x="{left+right/2}" y="14">{escape(value)}</text>
+</g></svg>
+'''
+    # Preserve bytes for accepted forest-v1 manifests; changing the default
+    # must not restyle unrelated projects when their checks run.
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="26" viewBox="0 0 {width} 26" role="img" aria-labelledby="title desc">
 <title id="title">{escape(label)}: {escape(value)}</title>
 <desc id="desc">Project information: {escape(label)} {escape(value)}.</desc>
@@ -41,8 +68,8 @@ def render(label: str, value: str, left: int | None = None, right: int | None = 
 
 def outputs(manifest: Path) -> list[tuple[Path, str]]:
     data = json.loads(manifest.read_text(encoding="utf-8-sig"))
-    if data.get("style") != STYLE or not isinstance(data.get("badges"), list) or not data["badges"]:
-        raise ValueError("manifest requires style forest-v1 and a nonempty badges list")
+    if data.get("style") not in STYLES or not isinstance(data.get("badges"), list) or not data["badges"]:
+        raise ValueError("manifest requires a supported style and a nonempty badges list")
     result, seen = [], set()
     for badge in data["badges"]:
         filename = badge["file"]
@@ -54,7 +81,8 @@ def outputs(manifest: Path) -> list[tuple[Path, str]]:
         target = manifest.parent / filename
         if target.is_symlink():
             raise ValueError("badge output must not be a symlink")
-        result.append((target, render(badge["label"], badge["value"], badge.get("label_width"), badge.get("value_width"))))
+        result.append((target, render(badge["label"], badge["value"], badge.get("label_width"), badge.get("value_width"),
+                                      style=data["style"], category=badge.get("category"))))
     return result
 
 
@@ -75,7 +103,7 @@ def main() -> int:
         if different:
             print("Badge style/content differs: " + ", ".join(different))
             return 1
-        print(f"{'Checked' if args.check else 'Rendered'} {len(rendered)} badges ({STYLE}). Evidence needs manual review.")
+        print(f"{'Checked' if args.check else 'Rendered'} {len(rendered)} badges using the manifest style. Evidence needs manual review.")
         return 0
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f"Badge rendering could not complete ({type(exc).__name__}).", file=sys.stderr)

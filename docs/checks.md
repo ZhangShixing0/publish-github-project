@@ -37,6 +37,8 @@ python skills/publish-github-project/scripts/render_badges.py docs/badges/badges
 
 前者生成清单中指定的 SVG；`--check` 只读比较，可发现缺失文件以及颜色、尺寸、文字等输出变化。清单中记录事实来源，但来源是否支持徽章内容仍需核对。本仓库的 `scripts/check.py` 同时检查两种 README 和这套徽章。
 
+新设计默认使用 `flat-square-v1`：直角双段、深灰标签、白字，信息块颜色由清单的 `category` 固定。已有 `forest-v1` 清单仍可原样生成和检查，不会因工具升级而自动换样式。多语言 README 默认各用一个标题，语言切换无需附加第二行译名。
+
 `--visual` 默认检查展示型首屏；工具可选 `--header-style compact`。保留已确认的特殊布局时使用 `--header-style preserve --header-note "实际保留理由"`，只跳过布局顺序检查，仍检查图片与 SVG。基础信息检查会寻找有内容的实际章节，导航或代码块中的关键词不算作章节。
 
 这是结构检查。它不能证明原有重要内容都被保留，不能判断文案是否符合代码，也不能证明 GitHub 的实际渲染成功。文字完整性、图片可读性、浅色与深色显示仍需单独复核。

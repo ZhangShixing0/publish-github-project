@@ -6,13 +6,13 @@ This is the single source of truth for the default opening layout. Use it for ne
 
 Keep these five elements in one centered identity block, in this order:
 
-1. One semantic project H1.
+1. One centered project H1 in the current README's language, without an automatically added translated subtitle.
 2. One current Hero with descriptive alt text.
 3. One short, concrete value sentence (prefer bold).
 4. One quick-navigation paragraph, normally three to five useful links.
 5. One badge paragraph, normally two to five verified, nonredundant badges.
 
-When multiple README languages are requested, insert one centered language-switch paragraph immediately after the H1. The five core elements retain their relative order. Use one H1 for a bilingual title; see `readme-languages.md` for examples and translation checks.
+When multiple README languages are requested, insert one centered language-switch paragraph immediately after the H1. The five core elements retain their relative order. Each edition normally displays its own title; language editions do not imply a stacked bilingual heading. Keep a specifically requested bilingual title within one H1. See `readme-languages.md` for examples and translation checks.
 
 Close the centered block before any maturity/scope callout or body content. Paragraphs, tables, commands, and detailed explanations in the body stay left aligned. Add a callout only for a material limitation; never invent a limitation to fill the template.
 
@@ -49,21 +49,32 @@ Keep local SVG badges in `docs/badges/` (or another `badges/` directory) so tool
 
 ### Stable visual default
 
-Use `scripts/render_badges.py` for new default badge sets. Its `forest-v1` style fixes the height at 26 px, corner radius at 5 px, font size at 12 px, dark green `#234e40` label, pale green `#eaf0e9` value surface, and system font fallbacks. Do not vary colors per technology, swap providers, add logos, or redesign the row during routine updates. Explicit user branding and accepted existing styles take precedence; keep those choices with the project instead of silently converting them.
+Use `scripts/render_badges.py` for new default badge sets. Its `flat-square-v1` style fixes the height at 20 px, square corners, two solid segments, 11 px normal-weight Verdana/system text, white lettering and a dark gray `#555555` label. No gradients, shadows, icons, rounded capsules or uppercase-only styling. Use the fixed category palette below instead of inventing new colors each time.
+
+| Category | Value color | Use |
+| --- | --- | --- |
+| `version` | Green `#456a63` | Version or explicit maturity stage |
+| `platform` | Brown-orange `#a86b3a` | Main authoring/host platform |
+| `technology` | Green `#456a63` | Essential framework or library |
+| `runtime` | Blue-gray `#427d89` | Required execution runtime |
+| `license` | Gray `#686d74` | Verified license or permissions |
+| `status` | Gray `#686d74` | Other warranted, evidence-backed status |
+
+Keep ordinary label casing such as `Version`, `Runtime`, and `License`, or the technology's actual name. The colors identify categories, not success/failure. Explicit user branding and accepted existing styles take precedence. The renderer still supports `forest-v1` for existing manifests; never silently migrate an accepted project while checking or updating its content.
 
 Store the style, ordered badge entries, and evidence references in a repository-owned `docs/badges/badges.json`. README badge order follows that manifest: version/stage first, project type if useful, essential runtime/technology, license, then any warranted status. Omit unsupported dimensions; identical styling does not mean identical facts.
 
 ```json
 {
-  "style": "forest-v1",
+  "style": "flat-square-v1",
   "badges": [
-    {"file": "version.svg", "label": "version", "value": "0.2.1", "evidence": "../../VERSION"},
-    {"file": "license.svg", "label": "license", "value": "MIT", "evidence": "../../LICENSE"}
+    {"file": "version.svg", "label": "Version", "value": "0.2.2", "category": "version", "evidence": "../../VERSION"},
+    {"file": "license.svg", "label": "License", "value": "MIT", "category": "license", "evidence": "../../LICENSE"}
   ]
 }
 ```
 
-Replace these illustrative values with verified facts. Evidence paths are relative to the manifest directory; URLs are also usable references. The renderer requires a reference but cannot establish its truth. Optional `label_width` and `value_width` preserve a reviewed width; otherwise widths adapt to the text, including Chinese labels.
+Replace these illustrative values with verified facts. A screenshot reference supplies visual treatment, not the target project's technologies, version or license. Record `style` and each `category` in the project manifest so subsequent runs retain the choice. Evidence paths are relative to the manifest directory; URLs are also usable references. The renderer requires a reference but cannot establish its truth. Optional `label_width` and `value_width` preserve a reviewed width; otherwise widths adapt to the text, including Chinese labels.
 
 ```shell
 python /path/to/skill/scripts/render_badges.py /path/to/repo/docs/badges/badges.json

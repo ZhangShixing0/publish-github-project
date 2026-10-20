@@ -11,7 +11,7 @@ from render_badges import outputs, render, text_width
 
 class BadgeRenderingTests(unittest.TestCase):
     def test_xml_escaping_prevents_injected_elements(self):
-        root = ET.fromstring(render("A & B", "<script>x</script>"))
+        root = ET.fromstring(render("A & B", "<script>x</script>", category="technology"))
         self.assertEqual(root.find("{*}title").text, "A & B: <script>x</script>")
         self.assertEqual(root.findall(".//{*}script"), [])
 
@@ -21,6 +21,28 @@ class BadgeRenderingTests(unittest.TestCase):
             render("version", "x\nx")
         with self.assertRaises(ValueError):
             render("version", "1", -2)
+
+    def test_square_style_uses_fixed_category_colors_and_white_text(self):
+        for category, color in (
+            ("version","#456a63"), ("platform","#a86b3a"),
+            ("runtime","#427d89"), ("license","#686d74"),
+        ):
+            root = ET.fromstring(render("Label","Value",category=category))
+            rects = root.findall("{*}rect")
+            self.assertEqual(root.get("height"),"20")
+            self.assertEqual([r.get("fill") for r in rects],["#555555",color])
+            self.assertTrue(all(r.get("rx") is None for r in rects))
+            self.assertEqual(root.find("{*}g").get("fill"),"#ffffff")
+
+    def test_square_style_requires_a_known_category(self):
+        for category in (None,"random-color"):
+            with self.assertRaises(ValueError):
+                render("Label","Value",category=category)
+
+    def test_accepted_legacy_style_still_renders(self):
+        root = ET.fromstring(render("version","1",style="forest-v1"))
+        self.assertEqual(root.get("height"),"26")
+        self.assertEqual(root.find("{*}rect").get("rx"),"5")
 
     def test_manifest_refuses_escape_duplicate_and_unknown_style(self):
         with tempfile.TemporaryDirectory() as directory:

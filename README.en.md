@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>GitHub Project Publisher<br><sub>GitHub 项目发布助手</sub></h1>
+<h1>GitHub Project Publisher</h1>
 
 [简体中文](README.md) · **[English](README.en.md)**
 
@@ -10,7 +10,7 @@
 
 [Why](#the-problem) · [Deliverables](#what-you-get) · [Workflow](#workflow) · [Start](#quick-start) · [Examples](#real-projects)
 
-[![Version 0.2.1](docs/badges/version.svg)](CHANGELOG.md)
+[![Version 0.2.2](docs/badges/version.svg)](CHANGELOG.md)
 [![Codex Skill](docs/badges/codex.svg)](skills/publish-github-project/SKILL.md)
 [![Python 3.10+](docs/badges/python.svg)](docs/checks.md)
 [![License MIT](docs/badges/license.svg)](LICENSE)

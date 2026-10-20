@@ -28,9 +28,9 @@ For initial publication, substantive README redesigns, or media replacement, rea
 ## README standard
 
 - Make the first screen answer: what is this, who is it for, what state/version is current, and where can a reader start.
-- Keep one semantic H1 even when the Hero contains display typography.
+- Keep one semantic H1 even when the Hero contains display typography. By default, use one title in the current README's language; do not automatically add a second-line translation.
 - Use `references/readme-header.md` as the sole opening-layout specification; do not improvise badge placement or alignment between projects. Preserve explicit user layouts and scoped-update boundaries.
-- Reuse the accepted badge style and repository badge manifest on updates; use the shipped renderer for the default style on new designs. Change factual values with evidence, not the visual style on every run.
+- Reuse the accepted badge style and repository badge manifest on updates. New designs default to the shipped flat-square renderer: dark gray labels, white text and fixed category colors. Change factual values with evidence, not the visual style on every run.
 - Put a concrete value sentence before technology details; use only truthful, useful badges.
 - For product-showcase READMEs, use one coherent Hero and a short navigation row. Choose a compact workflow/architecture visual when it explains meaningful relationships; a real input/output example may be better for a single-step tool. Add an early version center when versions or Releases exist and readers need to distinguish them.
 - For libraries and developer tools, prefer a compact lockup plus a real usage snippet over a cinematic banner.

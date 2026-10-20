@@ -2,7 +2,8 @@
      Keep the following five blocks in order; close centering before the body.
      For requested language editions, insert a relative language-switch row
      immediately after the single H1; see references/readme-languages.md.
-     Render the default badges with scripts/render_badges.py; retain the
+     Use one title in this edition's language; do not add a second-line translation.
+     Render flat-square-v1 badges with scripts/render_badges.py; retain the
      repository's badge manifest and accepted style during later updates. -->
 <div align="center">
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>GitHub 项目发布助手<br><sub>GitHub Project Publisher</sub></h1>
+<h1>GitHub 项目发布助手</h1>
 
 **[简体中文](README.md)** · [English](README.en.md)
 
@@ -10,7 +10,7 @@
 
 [价值](#项目解决什么问题) · [交付](#你会得到什么) · [流程](#工作流程) · [上手](#快速开始) · [案例](#实际案例)
 
-[![Version 0.2.1](docs/badges/version.svg)](CHANGELOG.md)
+[![Version 0.2.2](docs/badges/version.svg)](CHANGELOG.md)
 [![Codex Skill](docs/badges/codex.svg)](skills/publish-github-project/SKILL.md)
 [![Python 3.10+](docs/badges/python.svg)](docs/checks.md)
 [![License MIT](docs/badges/license.svg)](LICENSE)
