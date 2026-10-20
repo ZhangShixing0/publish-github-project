@@ -6,7 +6,7 @@
 
 **把能运行的代码，整理成别人看得懂、用得上的 GitHub 项目。**
 
-[项目价值](#项目解决什么问题) · [交付内容](#你会得到什么) · [工作流程](#工作流程) · [快速开始](#快速开始) · [实际案例](#实际案例)
+[价值](#项目解决什么问题) · [交付](#你会得到什么) · [流程](#工作流程) · [上手](#快速开始) · [案例](#实际案例)
 
 [![Version 0.2.0](docs/badges/version.svg)](CHANGELOG.md)
 [![Codex Skill](docs/badges/codex.svg)](skills/publish-github-project/SKILL.md)
