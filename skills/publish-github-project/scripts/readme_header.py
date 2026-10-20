@@ -36,6 +36,21 @@ def semantic_h1_count(text: str) -> int:
     return len(re.findall(r"(?im)^ {0,3}#\s+\S|<h1\b", text))
 
 
+def is_language_switch(block: str) -> bool:
+    """Recognize a separate row of relative README-language links."""
+    targets = re.findall(r"(?<!!)\[[^\]]+\]\(([^)\s]+)\)", block)
+    targets += re.findall(r"""<a\b[^>]*\bhref=["']([^"']+)["']""", block, re.I)
+    if len(set(targets)) < 2:
+        return False
+    for target in targets:
+        url = urlsplit(target)
+        if url.scheme or url.netloc or url.query or url.fragment:
+            return False
+        if not re.fullmatch(r"README(?:[._-][A-Za-z0-9-]+)?\.md", Path(unquote(url.path)).name, re.I):
+            return False
+    return True
+
+
 class Alignment(HTMLParser):
     """Record rendered-text/image alignment, including explicit nested overrides."""
     VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
@@ -158,6 +173,8 @@ def opening_issues(text: str, images, root: Path, readme: Path, style: str) -> l
         refs = [r for r in images if start <= r.line <= end and r.requires_alt]
         if semantic_h1_count(block):
             role = "title"
+        elif is_language_switch(block):
+            role = "languages"
         elif refs:
             badges = [r for r in refs if is_badge(r.source)]
             if badges and len(badges) == len(refs):
@@ -182,6 +199,8 @@ def opening_issues(text: str, images, root: Path, readme: Path, style: str) -> l
             issues.append(f"header: {role} block at line {start} must be centered")
 
     expected = ["title", "hero", "value", "navigation", "badges"]
+    if "languages" in roles:
+        expected.insert(1, "languages")
     if style == "compact" and "hero" not in roles:
         expected.remove("hero")
     if roles != expected:

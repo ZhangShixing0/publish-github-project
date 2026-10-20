@@ -21,9 +21,21 @@ python skills/publish-github-project/scripts/audit_repository.py /path/to/projec
 ```bash
 python skills/publish-github-project/scripts/verify_project.py /path/to/project --strict
 python skills/publish-github-project/scripts/verify_project.py /path/to/project --strict --visual
+python skills/publish-github-project/scripts/verify_project.py /path/to/project --strict --visual --readme README.en.md
 ```
 
 检查标题、基础信息入口、本地链接、响应式图片引用、SVG 安全约束和发布资源路径。`--strict` 将结构警告视为失败；`--visual` 增加首屏视觉与图片检查。
+
+`--readme` 选择仓库内的另一份 README，检查该文件及其相对链接；多语言版本分别运行。标题后的独立语言切换行不会改变正文导航与徽章的位置。翻译语义、双向切换及 GitHub 页面仍需人工复核。`--plan` 针对默认 README 的基线，与 `--readme` 分开执行。
+
+徽章按项目清单复用固定样式：
+
+```bash
+python skills/publish-github-project/scripts/render_badges.py docs/badges/badges.json
+python skills/publish-github-project/scripts/render_badges.py docs/badges/badges.json --check
+```
+
+前者生成清单中指定的 SVG；`--check` 只读比较，可发现缺失文件以及颜色、尺寸、文字等输出变化。清单中记录事实来源，但来源是否支持徽章内容仍需核对。本仓库的 `scripts/check.py` 同时检查两种 README 和这套徽章。
 
 `--visual` 默认检查展示型首屏；工具可选 `--header-style compact`。保留已确认的特殊布局时使用 `--header-style preserve --header-note "实际保留理由"`，只跳过布局顺序检查，仍检查图片与 SVG。基础信息检查会寻找有内容的实际章节，导航或代码块中的关键词不算作章节。
 

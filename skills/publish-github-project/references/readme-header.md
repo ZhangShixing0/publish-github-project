@@ -12,6 +12,8 @@ Keep these five elements in one centered identity block, in this order:
 4. One quick-navigation paragraph, normally three to five useful links.
 5. One badge paragraph, normally two to five verified, nonredundant badges.
 
+When multiple README languages are requested, insert one centered language-switch paragraph immediately after the H1. The five core elements retain their relative order. Use one H1 for a bilingual title; see `readme-languages.md` for examples and translation checks.
+
 Close the centered block before any maturity/scope callout or body content. Paragraphs, tables, commands, and detailed explanations in the body stay left aligned. Add a callout only for a material limitation; never invent a limitation to fill the template.
 
 Do not move the badges above the Hero, combine navigation with badges, place a long introduction in the identity block, or alternate alignment between its elements. Use blank lines between Markdown blocks and HTML wrappers, as in `assets/readme-template.md`. Do not rely on custom CSS, flexbox, or fixed no-wrap rows in GitHub. Badge and navigation rows may wrap naturally on mobile.
@@ -45,6 +47,31 @@ Two to five is a readability guideline, not a completeness score. A three-badge 
 
 Keep local SVG badges in `docs/badges/` (or another `badges/` directory) so tooling recognizes them. Use one consistent style and readable label/value text. Keep them self-contained, with `<title>`/`<desc>` and meaningful README alt text. Link badges to real evidence or the relevant README section when useful. A static version badge is legitimate without a Git tag; do not create a release to justify it.
 
+### Stable visual default
+
+Use `scripts/render_badges.py` for new default badge sets. Its `forest-v1` style fixes the height at 26 px, corner radius at 5 px, font size at 12 px, dark green `#234e40` label, pale green `#eaf0e9` value surface, and system font fallbacks. Do not vary colors per technology, swap providers, add logos, or redesign the row during routine updates. Explicit user branding and accepted existing styles take precedence; keep those choices with the project instead of silently converting them.
+
+Store the style, ordered badge entries, and evidence references in a repository-owned `docs/badges/badges.json`. README badge order follows that manifest: version/stage first, project type if useful, essential runtime/technology, license, then any warranted status. Omit unsupported dimensions; identical styling does not mean identical facts.
+
+```json
+{
+  "style": "forest-v1",
+  "badges": [
+    {"file": "version.svg", "label": "version", "value": "0.2.1", "evidence": "../../VERSION"},
+    {"file": "license.svg", "label": "license", "value": "MIT", "evidence": "../../LICENSE"}
+  ]
+}
+```
+
+Replace these illustrative values with verified facts. Evidence paths are relative to the manifest directory; URLs are also usable references. The renderer requires a reference but cannot establish its truth. Optional `label_width` and `value_width` preserve a reviewed width; otherwise widths adapt to the text, including Chinese labels.
+
+```shell
+python /path/to/skill/scripts/render_badges.py /path/to/repo/docs/badges/badges.json
+python /path/to/skill/scripts/render_badges.py /path/to/repo/docs/badges/badges.json --check
+```
+
+The first command writes only the manifest's named SVGs; the second is read-only and detects missing or changed output. Keep SVGs in the repository so display does not depend on a third-party badge service. Share them across language editions, update a version value with its source, and visually inspect new or longer text at normal size.
+
 ## Hero framing
 
 - Prefer a horizontal composition around 2:1–2.4:1. Show the product large enough to understand while preserving essential edges and controls. Recapture/reframe a real product when possible; do not stretch the image or fabricate implemented UI.
@@ -56,6 +83,6 @@ Keep local SVG badges in `docs/badges/` (or another `badges/` directory) so tool
 
 Run `python scripts/verify_project.py --strict --visual <repo>` for the showcase default. Use `--header-style compact` for a compact opening, or `--header-style preserve --header-note "specific reason"` for an intentional exception. `--header-style showcase` can also check the opening without `--visual`. Routine nonvisual checks without a header option do not force an unrelated existing README redesign.
 
-The checker detects missing/duplicate titles, missing badges, misplaced or split badge paragraphs, wrong opening order, mixed alignment, centered body content, and an unusually tall local Hero when its dimensions are readable. It recognizes local badge paths and does not count them as a Hero. It is a structural heuristic: it cannot establish whether a badge claim is true, whether prose is a good value sentence, or whether GitHub actually renders attractively.
+The checker detects missing/duplicate titles, missing badges, misplaced or split badge paragraphs, wrong opening order, mixed alignment, centered body content, and an unusually tall local Hero when its dimensions are readable. It recognizes a separate language-switch row after the title and local badge paths, and does not count badges as a Hero. It is a structural heuristic: it cannot establish whether a badge claim is true, whether prose is a good value sentence, or whether GitHub actually renders attractively.
 
 Inspect the actual GitHub README at desktop and mobile widths after an authorized publication. Check the five-element order, image framing, readable badges, natural wrapping, left-aligned body, and light/dark legibility. Before publication, a local preview is provisional; do not label it GitHub rendering evidence. Resolve structural warnings or document a real layout exception; retain manual evidence checks even when the script passes.

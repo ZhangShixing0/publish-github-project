@@ -158,16 +158,28 @@ def main() -> int:
     parser.add_argument("--header-style", choices=("showcase", "compact", "preserve"), help="Opening layout; --visual defaults to showcase. Routine checks otherwise leave header layout unchanged.")
     parser.add_argument("--header-note", help="Concrete reason for preserving an explicit/accepted nondefault layout.")
     parser.add_argument("--plan", type=Path, help="Check a local publication plan, baseline preservation and versioned media.")
+    parser.add_argument("--readme", type=Path, help="Check a specific repository-relative README, including a translated edition.")
     args = parser.parse_args()
     if args.header_style == "preserve" and not (args.header_note or "").strip():
         parser.error("--header-style preserve requires --header-note with the actual layout/scope reason")
     header_style = args.header_style or ("showcase" if args.visual else None)
+    if args.plan and args.readme:
+        parser.error("--plan checks the default README baseline; run --readme separately for translations")
 
     try:
         root = repository_root(Path(args.repository).resolve())
-        readme = next((root / name for name in ("README.md", "README.MD", "readme.md") if (root / name).is_file()), None)
-        if not readme:
-            print("ERROR README: missing README.md")
+        if args.readme:
+            if args.readme.is_absolute():
+                parser.error("--readme must be repository-relative")
+            readme = (root / args.readme).resolve()
+            try:
+                readme.relative_to(root)
+            except ValueError:
+                parser.error("--readme must stay inside the repository")
+        else:
+            readme = next((root / name for name in ("README.md", "README.MD", "readme.md") if (root / name).is_file()), None)
+        if not readme or not readme.is_file():
+            print("ERROR README: selected README file is missing")
             return 1
 
         text = readme.read_text(encoding="utf-8-sig")

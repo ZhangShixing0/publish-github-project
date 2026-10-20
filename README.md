@@ -1,6 +1,8 @@
 <div align="center">
 
-# GitHub Project Publisher
+<h1>GitHub 项目发布助手<br><sub>GitHub Project Publisher</sub></h1>
+
+**[简体中文](README.md)** · [English](README.en.md)
 
 ![GitHub 项目发布助手：从本地代码到清晰、可安装的 GitHub 项目。](docs/assets/hero-cover.png)
 
@@ -8,7 +10,7 @@
 
 [价值](#项目解决什么问题) · [交付](#你会得到什么) · [流程](#工作流程) · [上手](#快速开始) · [案例](#实际案例)
 
-[![Version 0.2.0](docs/badges/version.svg)](CHANGELOG.md)
+[![Version 0.2.1](docs/badges/version.svg)](CHANGELOG.md)
 [![Codex Skill](docs/badges/codex.svg)](skills/publish-github-project/SKILL.md)
 [![Python 3.10+](docs/badges/python.svg)](docs/checks.md)
 [![License MIT](docs/badges/license.svg)](LICENSE)
@@ -33,7 +35,7 @@ GitHub Project Publisher 把这些工作连接起来：**理解项目 → 整理
 
 | 交付内容 | 读者或维护者能获得什么 |
 | --- | --- |
-| **一页清晰的 README** | 项目定位、解决的问题、实际效果、核心流程和最短上手路径 |
+| **一页清晰的 README** | 项目定位、解决的问题、实际效果、核心流程和最短上手路径；统一徽章样式，可按需提供中英双版本 |
 | **适合项目的展示素材** | 真实产品截图、解释协作的流程图，或清楚的命令输入输出示例；有视频时整理播放入口 |
 | **可复核的发布范围** | 候选文件、隐私发现、最终提交内容与需要进一步核对的事项 |
 | **完整的仓库入口** | 经确认的简介、主题标签，以及已有的演示或文档入口 |
@@ -161,7 +163,7 @@ https://github.com/ZhangShixing0/publish-github-project/tree/main/skills/publish
 python scripts/check.py
 ```
 
-它会执行回归测试、README 结构与素材检查、发布文件审计和技能包完整性检查。测试覆盖首屏布局、内容保留、图表识别、素材替换、暂存区与远端核对等场景，不需要 GitHub 凭据，也不会执行发布。
+它会执行回归测试、中英 README 结构与素材检查、徽章样式一致性检查、发布文件审计和技能包完整性检查。测试覆盖首屏布局、内容保留、图表识别、素材替换、暂存区与远端核对等场景，不需要 GitHub 凭据，也不会执行发布。
 
 需要在自己的项目里单独运行检查时：
 
@@ -182,6 +184,7 @@ python skills/publish-github-project/scripts/verify_remote.py /path/to/your-proj
 | 当前版本与更新内容 | [更新记录](CHANGELOG.md) · [技能版本](skills/publish-github-project/VERSION) |
 | 检查、发布方案与安装副本比较 | [检查脚本说明](docs/checks.md) |
 | README 结构与图表选择 | [发布方案规范](skills/publish-github-project/references/publication-plan.md) |
+| 固定徽章样式与中英切换 | [首屏与徽章规范](skills/publish-github-project/references/readme-header.md) · [多语言维护](skills/publish-github-project/references/readme-languages.md) |
 | 提交问题或参与改进 | [贡献说明](CONTRIBUTING.md) |
 
 <details>

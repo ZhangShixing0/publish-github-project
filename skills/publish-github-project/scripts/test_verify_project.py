@@ -119,6 +119,34 @@ class HeaderTests(unittest.TestCase):
         result=self.cli(self.document(),'--visual')
         self.assertEqual(result.returncode,0,result.stdout+result.stderr)
 
+    def test_bilingual_title_and_language_row_preserve_layout(self):
+        title = "<h1>项目名称<br><sub>Project name</sub></h1>"
+        languages = "[简体中文](README.md) · [English](README.en.md)"
+        document = self.document([title,languages,self.HERO,self.VALUE,self.NAV,self.BADGES])
+        self.assertEqual(self.issues(document), [])
+        (self.root/"README.en.md").write_text(document,encoding="utf-8")
+        result = self.cli(document,"--visual","--readme","README.en.md")
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+
+    def test_language_row_cannot_replace_navigation_or_move_to_bottom(self):
+        languages = "[简体中文](README.md) · [English](README.en.md)"
+        for parts in (
+            [self.TITLE,languages,self.HERO,self.VALUE,self.BADGES],
+            [self.TITLE,self.HERO,self.VALUE,self.NAV,self.BADGES,languages],
+        ):
+            self.assertTrue(any("expected" in x for x in self.issues(self.document(parts))))
+
+    def test_translation_is_checked_instead_of_default_readme(self):
+        (self.root/"README.en.md").write_text(self.document()+"\n[Missing](missing.txt)",encoding="utf-8")
+        result = self.cli(self.document(),"--visual","--readme","README.en.md")
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn("local link is broken",result.stdout)
+
+    def test_missing_translation_and_outside_path_fail(self):
+        for path in ("README.en.md", "../README.md"):
+            result = self.cli(self.document(),"--readme",path)
+            self.assertNotEqual(result.returncode,0)
+
     def test_shipped_template_produces_the_canonical_opening(self):
         template=(Path(__file__).resolve().parents[1]/'assets/readme-template.md').read_text(encoding='utf-8')
         opening=template.split('> [!IMPORTANT]',1)[0]

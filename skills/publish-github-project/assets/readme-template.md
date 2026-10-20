@@ -1,5 +1,9 @@
 <!-- Opening specification: references/readme-header.md in the publishing skill.
-     Keep the following five blocks in order; close centering before the body. -->
+     Keep the following five blocks in order; close centering before the body.
+     For requested language editions, insert a relative language-switch row
+     immediately after the single H1; see references/readme-languages.md.
+     Render the default badges with scripts/render_badges.py; retain the
+     repository's badge manifest and accepted style during later updates. -->
 <div align="center">
 
 # {{PROJECT_NAME}}

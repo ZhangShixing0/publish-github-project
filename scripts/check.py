@@ -29,6 +29,7 @@ def main():
         return 1
     for name, flags in (
         ("verify_project.py", ["--strict", "--visual"]),
+        ("verify_project.py", ["--strict", "--visual", "--readme", "README.en.md"]),
         ("audit_repository.py", []),
     ):
         outcome = subprocess.run(
@@ -38,6 +39,13 @@ def main():
         )
         if outcome.returncode:
             return outcome.returncode
+    badges = subprocess.run(
+        [sys.executable, "-B", str(SCRIPTS / "render_badges.py"),
+         str(ROOT / "docs/badges/badges.json"), "--check"],
+        cwd=ROOT, check=False,
+    )
+    if badges.returncode:
+        return badges.returncode
     return subprocess.run(
         [sys.executable, "-B", str(SCRIPTS / "skill_package.py"), "verify"],
         cwd=ROOT, check=False,

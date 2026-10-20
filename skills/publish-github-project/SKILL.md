@@ -18,7 +18,7 @@ For initial publication, substantive README redesigns, or media replacement, rea
 3. Inspect `git status`, `.gitignore`, tracked and untracked candidates, manifests, entrypoints, tests, screenshots, docs, license, tags/releases, and remote configuration. Never assume an untracked file is disposable.
 4. Run `scripts/audit_repository.py <repo>`. Ask for known client names, identifiers, or institution markers when privacy matters; pass them with `--deny` or `--deny-file`. Stop on new findings before staging or publishing.
 5. Read `references/readme-style.md` before creating or substantially rewriting a README. When the user asks for a beautiful README, repository showcase, Hero, or stronger GitHub presentation, also read `references/readme-visual-design.md` and select the smallest fitting design mode.
-6. Read `references/readme-header.md` when creating or changing the opening; it defines the default alignment/order, badge evidence, and deliberate exceptions. Adapt `assets/readme-template.md` to verified project facts. Create a repository-native SVG Hero only when it improves comprehension and no current, privacy-safe visual already exists. Keep it self-contained, accessible, lightweight, and visibly tied to the product.
+6. Read `references/readme-header.md` when creating or changing the opening; it defines alignment/order, the reusable badge style, evidence, and deliberate exceptions. For requested language editions or bilingual titles, also read `references/readme-languages.md`. Adapt `assets/readme-template.md` to verified project facts. Create a repository-native SVG Hero only when it improves comprehension and no current, privacy-safe visual already exists. Keep it self-contained, accessible, lightweight, and visibly tied to the product.
 7. Add only architecture, deployment, security, roadmap, contribution, or changelog documents that materially help reproduction or governance. Link to detail instead of turning the README into a wall of text.
 8. Run checks appropriate to the changed scope in an isolated or project-local environment; full publication includes the project's release checks. For an existing README, complete the before/after content review in `references/focused-updates.md`. Run `scripts/verify_project.py --strict <repo>` and supply `--plan /private/task/plan.json` when a publication record was created; add `--visual` after a visual README redesign (showcase header checks are then enabled by default). Select a documented compact/preserve header mode when appropriate. Inspect rendered assets before claiming visual QA. Once required checks pass, repeat only when a change, failure, or unresolved concern warrants it.
 9. Read `references/publishing-policy.md`. Review the exact staged scope, run `audit_repository.py --staged <repo>` on the index bytes, and verify that secrets, datasets, runtime outputs, screenshot caches, and generated customer artifacts are excluded. For API-created commits, audit the exact upload candidates and retain their Git blob IDs for remote comparison.
@@ -30,6 +30,7 @@ For initial publication, substantive README redesigns, or media replacement, rea
 - Make the first screen answer: what is this, who is it for, what state/version is current, and where can a reader start.
 - Keep one semantic H1 even when the Hero contains display typography.
 - Use `references/readme-header.md` as the sole opening-layout specification; do not improvise badge placement or alignment between projects. Preserve explicit user layouts and scoped-update boundaries.
+- Reuse the accepted badge style and repository badge manifest on updates; use the shipped renderer for the default style on new designs. Change factual values with evidence, not the visual style on every run.
 - Put a concrete value sentence before technology details; use only truthful, useful badges.
 - For product-showcase READMEs, use one coherent Hero and a short navigation row. Choose a compact workflow/architecture visual when it explains meaningful relationships; a real input/output example may be better for a single-step tool. Add an early version center when versions or Releases exist and readers need to distinguish them.
 - For libraries and developer tools, prefer a compact lockup plus a real usage snippet over a cinematic banner.
@@ -66,6 +67,7 @@ For initial publication, substantive README redesigns, or media replacement, rea
 - `references/readme-style.md`: information order, writing, evidence, and restraint.
 - `references/publication-plan.md`: project-specific body order, diagram decisions, baseline preservation, scoped media records and validation.
 - `references/readme-header.md`: canonical opening layout, badge selection/evidence, Hero framing, and checker modes.
+- `references/readme-languages.md`: bilingual identity, relative language switches, translation parity and per-edition checks.
 - `references/readme-visual-design.md`: design modes, Hero construction, version navigation, GitHub constraints, and visual QA.
 - `references/publishing-policy.md`: authority and pre/post-publish gates.
 - `references/repository-metadata.md`: description, topics, homepage, visibility, and post-publish metadata verification.
@@ -74,6 +76,7 @@ For initial publication, substantive README redesigns, or media replacement, rea
 - `assets/readme-template.md`: adaptable product-showcase skeleton; remove unused placeholders.
 - `scripts/audit_repository.py`: scan working-tree candidates or exact index bytes (`--staged`), including text/SVG/OOXML, credential literals, identifiers, deny terms, and media requiring manual review.
 - `scripts/verify_project.py`: check README structure, links, image assets, safe SVG, header arrangement, and manifest discoverability; uses `scripts/readme_header.py` for opening checks.
+- `scripts/render_badges.py`: render a fixed, self-contained SVG badge style from a repository-owned manifest; `--check` detects visual/content drift without writing.
 - `scripts/publication_plan.py`: create and verify local task records; `--plan` integrates these checks into README verification.
 - `scripts/skill_package.py`: verify this installed skill's `VERSION` and file manifest; optionally compare another installed copy. No auto-update or overwrite.
 - `scripts/verify_remote.py`: verify the published branch SHA and file tree via Git or the GitHub API, with optional expected blob IDs; metadata, CI, privacy and rendering need separate verification.
